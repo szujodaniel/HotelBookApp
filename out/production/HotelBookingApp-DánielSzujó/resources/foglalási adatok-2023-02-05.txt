@@ -1,0 +1,4 @@
+
+Booking cost: 18500
+Room price: 18500
+Registered Data: numberPeople=1, days=1, breakfast=true, name=Daniel, roomType='Standard, extraBed=true

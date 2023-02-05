@@ -18,169 +18,168 @@ public class BookingService implements BookingInterface {
     int roomPrice;
 
     @Override
-    public void newBooking(ArrayList<String> newBooking) {
+    public void newBooking(UserInput userInput) {
 
-        if (newBooking.get(4).equalsIgnoreCase("Standard")) {
+        if (userInput.roomType.equalsIgnoreCase("Standard")) {
 
-            if (newBooking.get(5).equalsIgnoreCase("Y") && newBooking.get(2).equalsIgnoreCase("N")) {
+            if (userInput.extraBed && !userInput.breakfast) {
                 StandardRoom standardRoom = new StandardRoom(true);
-                roomPrice = standardRoom.calculateRoomPrice() + (extraBed * Integer.parseInt(newBooking.get(1)));
+                roomPrice = standardRoom.calculateRoomPrice() + (extraBed * userInput.days);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("N") && newBooking.get(2).equalsIgnoreCase("N")) {
+            } else if (!userInput.extraBed && !userInput.breakfast) {
                 StandardRoom standardRoom = new StandardRoom(false);
                 roomPrice = standardRoom.calculateRoomPrice();
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("Y") && newBooking.get(2).equalsIgnoreCase("Y")) {
-
+            } else if (userInput.extraBed && userInput.breakfast) {
                 StandardRoom standardRoom = new StandardRoom(true);
-                roomPrice = standardRoom.calculateRoomPrice() + (extraBed * Integer.parseInt(newBooking.get(1))) + (breakfast * Integer.parseInt(newBooking.get(0)));
+                roomPrice = standardRoom.calculateRoomPrice() + (extraBed * userInput.days) + (breakfast * userInput.numberPeople);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\n Registered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("N") && newBooking.get(2).equalsIgnoreCase("Y")) {
-
+            } else if (!userInput.extraBed && userInput.breakfast) {
                 StandardRoom standardRoom = new StandardRoom(false);
-                roomPrice = standardRoom.calculateRoomPrice() + (breakfast * Integer.parseInt(newBooking.get(0)));
+                roomPrice = standardRoom.calculateRoomPrice() + (breakfast * userInput.numberPeople);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
-
+                System.out.println("\nRegistered Data: " + userInput);
             }
-        } else if (newBooking.get(4).equalsIgnoreCase("King")) {
 
-            if (newBooking.get(5).equalsIgnoreCase("Y") && newBooking.get(2).equalsIgnoreCase("N")) {
+        } else if (userInput.roomType.equalsIgnoreCase("King")) {
+
+            if (userInput.extraBed && !userInput.breakfast) {
                 KingRoom kingroom = new KingRoom(true, 11000);
-                roomPrice = kingroom.calculateRoomPrice() + (extraBed * Integer.parseInt(newBooking.get(1)));
+                roomPrice = kingroom.calculateRoomPrice() + (extraBed * userInput.days);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("N") && newBooking.get(2).equalsIgnoreCase("N")) {
+            } else if (!userInput.extraBed && !userInput.breakfast) {
                 KingRoom kingRoom = new KingRoom(false, 11000);
                 roomPrice = kingRoom.calculateRoomPrice();
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("Y") && newBooking.get(2).equalsIgnoreCase("Y")) {
+            } else if (userInput.extraBed && userInput.breakfast) {
                 KingRoom kingroom = new KingRoom(true, 11000);
-                roomPrice = kingroom.calculateRoomPrice() + (extraBed * Integer.parseInt(newBooking.get(1)) + (breakfast * Integer.parseInt(newBooking.get(0))));
+                roomPrice = kingroom.calculateRoomPrice() + (extraBed * userInput.days) + (breakfast * userInput.numberPeople);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("N") && newBooking.get(2).equalsIgnoreCase("Y")) {
+            } else if (!userInput.extraBed && userInput.breakfast) {
                 KingRoom kingRoom = new KingRoom(false, 11000);
-                roomPrice = kingRoom.calculateRoomPrice() + (breakfast * Integer.parseInt(newBooking.get(0)));
+                roomPrice = kingRoom.calculateRoomPrice() + (breakfast * userInput.numberPeople);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
             }
 
-        } else if (newBooking.get(4).equalsIgnoreCase("Superior")) {
+        } else if (userInput.roomType.equalsIgnoreCase("Superior")) {
 
-            if (newBooking.get(5).equalsIgnoreCase("Y") && newBooking.get(2).equalsIgnoreCase("N")) {
+            if (userInput.extraBed && !userInput.breakfast) {
                 SuperiorRoom superiorRoom = new SuperiorRoom(true, 3500);
-                roomPrice = superiorRoom.calculateRoomPrice() + (extraBed * Integer.parseInt(newBooking.get(1)));
+                roomPrice = superiorRoom.calculateRoomPrice() + (extraBed * userInput.days);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("N") && newBooking.get(2).equalsIgnoreCase("N")) {
+            } else if (!userInput.extraBed && !userInput.breakfast) {
                 SuperiorRoom superiorRoom = new SuperiorRoom(false, 3500);
                 roomPrice = superiorRoom.calculateRoomPrice();
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
 
-            } else if (newBooking.get(5).equalsIgnoreCase("Y") && newBooking.get(2).equalsIgnoreCase("Y")) {
+            } else if (userInput.extraBed && userInput.breakfast) {
                 SuperiorRoom superiorRoom = new SuperiorRoom(true, 3500);
-                roomPrice = superiorRoom.calculateRoomPrice() + (extraBed * Integer.parseInt(newBooking.get(1))) + (breakfast * Integer.parseInt(newBooking.get(0)));
+                roomPrice = superiorRoom.calculateRoomPrice() + (extraBed * userInput.days) + (breakfast * userInput.numberPeople);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
-            } else if (newBooking.get(5).equalsIgnoreCase("N") && newBooking.get(2).equalsIgnoreCase("Y")) {
+                System.out.println("\nRegistered Data: " + userInput);
+
+            } else if (!userInput.extraBed && userInput.breakfast) {
                 SuperiorRoom superiorRoom = new SuperiorRoom(false, 3500);
-                roomPrice = superiorRoom.calculateRoomPrice() + (breakfast * Integer.parseInt(newBooking.get(0)));
+                roomPrice = superiorRoom.calculateRoomPrice() + (breakfast * userInput.numberPeople);
                 System.out.println("Room price: " + roomPrice);
 
-                Booking booking = new Booking(roomPrice, Integer.parseInt(newBooking.get(0)), Integer.parseInt(newBooking.get(1)), newBooking.get(3));
+                Booking booking = new Booking(roomPrice, userInput.numberPeople, userInput.days, userInput.name);
 
                 bookingCost = booking.getTotalCost();
 
                 System.out.println("\nBooking cost: " + bookingCost);
-                System.out.println("\nRegistered Data: " + newBooking);
+                System.out.println("\nRegistered Data: " + userInput);
             }
         }
     }
 
-    public void WriteDataToFile(ArrayList<String> newBooking) {
+    public void WriteDataToFile(UserInput userInput) {
         LocalDate now = LocalDate.now();
         try {
-            String content = "\nBooking cost: " + bookingCost + "\nRoom price: " + roomPrice + "\nRegistered Data: " + newBooking;
-            Files.write(Paths.get("src/resources/foglalási adatok-"+ now +".txt"), content.getBytes("UTF-8"));
+            String content = "\nBooking cost: " + bookingCost + "\nRoom price: " + roomPrice + "\nRegistered Data: " + userInput;
+            Files.write(Paths.get("src/resources/foglalási adatok-" + now + ".txt"), content.getBytes("UTF-8"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

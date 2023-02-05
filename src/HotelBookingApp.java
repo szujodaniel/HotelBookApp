@@ -12,38 +12,39 @@ import java.util.Scanner;
 public class HotelBookingApp {
     public static void main(String[] args) {
 
+        UserInput userInput = new UserInput();
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scannerInt = new Scanner(System.in);
+        Scanner scannerString = new Scanner(System.in);
 
-        ArrayList<String> userList = new ArrayList<>();
+        System.out.println("Please enter the information below: " + "\nNumber of booking people?");
+        userInput.setNumberPeople(scannerInt.nextInt());
 
-        System.out.println("Please enter the information below: " + "\nNumber of booking people?" );
+        System.out.println("How many days you stay?");
+        userInput.setDays(scannerInt.nextInt());
 
-        String numberPeople = scanner.nextLine();
-        userList.add(numberPeople);
+        System.out.println("What name can we register your booking?");
+        userInput.setName(scannerString.nextLine());
 
-        System.out.println("How many days you stay?" );
-        String days = scanner.nextLine();
-        userList.add(days);
+        System.out.println("Which room would you like to choose?(Standard/King/Superior)");
+        userInput.setRoomType(scannerString.nextLine());
 
-        System.out.println("Do you want breakfast? (Y/N)" );
-        String breakfast = scanner.nextLine();
-        userList.add(breakfast);
+        System.out.println("Do you need extra bed?(Y/N)");
+        String extraBedInput = scannerString.nextLine();
 
-        System.out.println("What name can we register your booking?" );
-        String name = scanner.nextLine();
-        userList.add(name);
+        if (extraBedInput.equalsIgnoreCase("Y")) {
+            userInput.setExtraBed(true);
+        }
 
-        System.out.println("Which room would you like to choose?(Standard/King/Superior)" );
-        String roomType = scanner.nextLine();
-        userList.add(roomType);
+        System.out.println("Do you want breakfast?(Y/N)");
+        String breakfastInput = scannerString.nextLine();
 
-        System.out.println("Do you need extra bed?(Y/N)" );
-        String extraBed = scanner.nextLine();
-        userList.add(extraBed);
+        if (breakfastInput.equalsIgnoreCase("Y")) {
+            userInput.setBreakfast(true);
+        }
 
         BookingService bookingService = new BookingService();
-        bookingService.newBooking(userList);
-        bookingService.WriteDataToFile(userList);
+        bookingService.newBooking(userInput);
+        bookingService.WriteDataToFile(userInput);
     }
 }
