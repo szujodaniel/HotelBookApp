@@ -1,0 +1,4 @@
+
+Booking cost: 26000
+Room price: 26000
+Registered Data: [2, 2, Y, Daniel, Standard, Y]
